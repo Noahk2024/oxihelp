@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Centered Hero with Two Buttons</title>
+    <style>
+        body {
+            background-color: #343a40; /* Dark background color */
+            color: #fff; /* Light text color */
+            padding-top: 56px; /* Adjust according to your navigation bar height */
+        }
+
+        .b-example-divider {
+            width: 100%;
+            height: 3rem;
+            background-color: rgba(0, 0, 0, .1);
+            border: solid rgba(0, 0, 0, .15);
+            border-width: 1px 0;
+            box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+         }
+
+        .hero-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            text-align: center;
+        }
+
+        .hero-heading {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .btn-primary,
+        .btn-secondary {
+            color: #fff;
+            background-color: #007bff; /* Primary button color */
+            border-color: #007bff; /* Primary button border color */
+        }
+
+        .btn-secondary {
+            background-color: #6c757d; /* Secondary button color */
+            border-color: #6c757d; /* Secondary button border color */
+        }
+    </style>
+</head>
+
+<body>
+    <div class = "container">
+    <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+  
+        <ul class="nav nav-pills">
+          <li class="nav-item"><a href="#" class="nav-link active" aria-current="page">Home</a></li>
+          <li class="nav-item"><a href="#" class="nav-link">Methods</a></li>
+          <li class="nav-item"><a href="#" class="nav-link">About</a></li>
+        </ul>
+      </header>
+    </div>
+
+    <div class="container-fluid">
+        <div class="hero-container">
+            <h1 class="hero-heading">Your Hero Heading</h1>
+            <p>Your hero subheading or description goes here.</p>
+            <div class="mt-4">
+                <a href="#formContainer" class="btn btn-primary mr-2" onclick = "toggleForm()">Button 1</a>
+                <a href="#" class="btn btn-secondary">Button 2</a>
+            </div>
+        </div>
+    </div>
+    <div class="b-example-divider"></div>
+
+    {%if newForm%}
+            {{result}}
+        {%endif%}
+    <div class="b-example-divider"></div>
+    <div id="formContainer" style="display: none;">
+        <form id="myForm" method="post" action = "/">
+            <!-- Add your form fields here -->
+            <label for="height">Height in inches:</label>
+            <input type="number" id = "height" name = "height">
+            <br>
+            <label for="weight">Weight in pounds:</label>
+            <input type="number" id = "weight" name = "weight">
+            <br>
+            <label for="sex">Sex M or F:</label>
+            <input type="" id = "sex" name = "Sex">
+            <br>
+            <label for="hr">Heart Rate:</label>
+            <input type="number" id = "hr" name = "hr">
+            <br>
+            <label for="o2">Spo2:</label>
+            <input type="number" id = "o2" name = "SpO2">
+            <br>
+
+
+            <!-- Submit button for the form -->
+            <button type="submit" class="btn btn-primary mt-2">Submit</button>
+        </form>
+
+        
+    <div class="b-example-divider"></div>
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+
+        function toggleForm() {
+            var formContainer = document.getElementById("formContainer");
+            formContainer.style.display = formContainer.style.display === "none" ? "block" : "none";
+        }
+
+    </script>
+</body>
+
+</html>
