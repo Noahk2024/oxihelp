@@ -6,17 +6,17 @@ import ast
 
 parameter = {'Normal':
 (20.51082220297361, 97.5, 80.91666666666667),
-'Prehypertension,Stage 1 hypertension':
+'Prehypertension, Stage 1 hypertension':
 (23.414531426178254, 133.91304347826087, 61.21739130434783),
 'Prehypertension':
 (24.13044633605246, 128.23529411764707, 69.97058823529412),
 'Stage 1 hypertension':
 (23.21843054510754, 153.5, 59.9),
-'Normal,Prehypertension':
+'Normal, Prehypertension':
 (21.4930760450313, 117.9047619047619, 75.28571428571429),
 'Stage 2 hypertension':
 (25.061207602888338, 170.625, 84.9375),
-'Prehypertension,Normal':
+'Prehypertension, Normal':
 (23.113140797045055, 121.8, 89.73333333333333)
 }
 
@@ -31,12 +31,14 @@ def classify(bmi, bp, hr):
         if dist < min_dist:
             min_dist = dist
             min_mean = means
-    return min_mean
+    return min_mean, int(min_dist)
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
     results = None
     newForm = False
+    message = None
+    distance = None
     if request.method == 'POST':
 
         height = int(request.form['height'])
@@ -46,12 +48,27 @@ def index():
         bmi = (weight/(height**2))* 703
         blood_pressure = estimateBP.find_bp.get_bp(hr, bmi)
 
-        classification = classify(bmi, blood_pressure, hr)
+        classification, distance = classify(bmi, blood_pressure, hr)
         results = classification
         newForm = True
         
     print(results)
-    return render_template('index.html', result = results, newForm = newForm)
+    
+    if (results == 'Prehypertension, Stage 1 hypertension'):
+        message = "You are at borderline between Prehypertension and Stage 1 hypertension and should consult a medical professional."
+    elif (results == "Normal"):
+        message = "You have no current cardiovascular diseases!"
+    elif (results == "Prehypertension"):
+        message = "You likely have prehypertension, and should consult a medical professional before it progresses."
+    elif (results == "Stage 1 hypertension"):
+        message = "You likely have Stage 1 hypertension, and should consult a medical professional."
+    elif (results == "Normal, Prehypertension"):
+        message = "You are at a borderline betweeen Normal and Prehypertension and should consult a medical professional."
+    elif (results == "Stage 2 hypertension"):
+        message = "You likely have Stage 2 hypertension, and should consult a medical professional immediately."
+    elif (results == "Prehypertension, Normal"):
+        message = "You are at a borderline between Normal and Prehypertension and should consult a medical professional."
+    return render_template('index.html', result = results, newForm = newForm, distance = distance, message = message)
 
 @app.route('/about')
 def about():

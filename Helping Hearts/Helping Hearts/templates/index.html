@@ -99,8 +99,17 @@
             <div class="container px-5">
                 <div class="row gx-5 align-items-center">
                     <div class="col-lg-8 order-lg-1 mb-5 mb-lg-0">
+                                    {%if newForm %}
+
+                                        <h2>Within an 80.20% Correlation, people with your metrics have the {{result}} classification for Hypertension</h2>
+                                        <h3>{{distance}}: This is your similarity index with other people in your classification group. </h3>
+                                        <h5>{{message}}</h5>
+                                        <br><br><br><br><br><br>
+                                    {%endif%}
                         <div class="container-fluid px-5">
                             <div class="row gx-5">
+                                
+
                                 <div class = "container">
                             
                                     </div>
@@ -116,9 +125,7 @@
                                         </div>
                                     </div>
                                     <div class="b-example-divider"></div>
-                                    {%if newForm %}
-                                            {{result}}
-                                    {%endif%}
+                                    
                                     
                                     <div class="b-example-divider"></div>
                                     <div id="formContainer" style="display: none;">
@@ -152,7 +159,8 @@
                                 
                                         
                                     <div class="b-example-divider"></div>
-                                
+                                    <br><br>
+                                    
                                 
                                     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
                                     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
